@@ -24,7 +24,7 @@ import 'static/styles/index.less'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
-    <ConnectionProvider endpoint={'http://localhost:8899'}>
+    <ConnectionProvider endpoint={'https://api.devnet.solana.com'}>
       <WalletProvider
         wallets={[new PhantomWalletAdapter(), new SolflareWalletAdapter()]}
         autoConnect
