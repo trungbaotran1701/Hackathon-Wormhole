@@ -33,11 +33,9 @@ import {
   testDataCheckpoint,
 } from 'function'
 
-type LayoutType = Parameters<typeof Form>[0]['layout']
+import './style.css'
 
 function View() {
-  const [form] = Form.useForm()
-
   //Anchor
   const wallet = useAnchorWallet()
   async function getProvider() {
@@ -47,7 +45,7 @@ function View() {
 
     /* create the provider and return it to the caller */
     /* network set to local network for now */
-    const network = 'http://127.0.0.1:8899'
+    const network = 'https://api.devnet.solana.com'
     const connection = new Connection(network, 'processed')
 
     const provider = new AnchorProvider(connection, wallet, {
@@ -55,6 +53,11 @@ function View() {
       commitment: 'processed',
     })
     return { provider, connection }
+  }
+
+  const onFinish = (e: any) => {
+    console.log('hehe')
+    console.log(e)
   }
 
   async function handleInitUser() {
@@ -83,29 +86,6 @@ function View() {
         programId,
         connection,
       )
-
-      // const pdaCheckpointAccount = await program.account.checkpoint.fetch(
-      //   '3UPQuf7ZLNGa59JphSA6Q1ZXV9gzA4dEBWJWBmkVo4bY',
-      // )
-
-      // console.log(pdaCheckpointAccount)
-
-      // const pdaCheckpointDataInitAccount =
-      //   await program.account.checkpointDataInit.fetch(
-      //     'DV7y3aUsj5BPPG1hnCTq3o97m3Z4kRmdAZRZ2hfG9p7B',
-      //   )
-      // console.log(pdaCheckpointDataInitAccount)
-
-      // const pdaWormholeMaxAccount = await program.account.wormholeMax.fetch(
-      //   '5Rk3sV8hLj2w3oSNQh3gR2iKxFVuEZTMRjDr4NkBJ6xD',
-      // )
-      // console.log(pdaWormholeMaxAccount)
-
-      // const pdaWormholePayloadAccount =
-      //   await program.account.wormholePayload.fetch(
-      //     'DcRX4mLUQbq5ovzShGu8shwZ62eDKo4X5JVCyDaYTUKa',
-      //   )
-      // console.log(pdaWormholePayloadAccount)
 
       // Pause for 5 seconds
       await sleep(5000)
@@ -166,34 +146,29 @@ function View() {
             <Typography.Title>
               My Balance: {balance / 10 ** 9} SOL
             </Typography.Title>
-            <Space>
-              <Button
-                type="primary"
-                size="large"
-                onClick={handleInitUser}
-                loading={loading}
-              >
-                Handle init user
-              </Button>
-            </Space>
           </Space>
         </Col>
       </Row>
-      <Form form={form}>
-        <Form.Item label="From">
-          <Input placeholder="Ethereum address" />
+      <Form onFinish={onFinish} className="form-container">
+        <Form.Item label="From" name="from" className="w-full">
+          <Input placeholder="Ethereum address" className="rounded-md" />
         </Form.Item>
-        <Form.Item label="To">
-          <Input placeholder="Ethereum address" />
+        <Form.Item label="To" name="to" className="w-full">
+          <Input placeholder="Ethereum address" className="rounded-md" />
         </Form.Item>
-        <Form.Item label="Token address">
-          <Input placeholder="Ethereum address" />
+        <Form.Item label="Token address" name="tokenAddress" className="w-full">
+          <Input placeholder="Ethereum address" className="rounded-md" />
         </Form.Item>
-        <Form.Item label="Amount">
-          <Input placeholder="Amount of tokens you want to transfer" />
+        <Form.Item label="Amount" name="amount" className="w-full">
+          <Input
+            placeholder="Amount of tokens you want to transfer"
+            className="rounded-md"
+          />
         </Form.Item>
-        <Form.Item>
-          <Button type="primary">Send Message</Button>
+        <Form.Item className="flex justify-center">
+          <Button block type="primary" htmlType="submit" className="rounded-md">
+            Send Message
+          </Button>
         </Form.Item>
       </Form>
     </Layout>
