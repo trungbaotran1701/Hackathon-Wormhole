@@ -1,0 +1,875 @@
+{
+  "version": "0.1.0",
+  "name": "workflow",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createMission",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mission",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "currentVoteData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "missionUserSolana",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "missionUserWeb2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "missionUserSecp256k1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "maxCheckpointId",
+          "type": "u16"
+        },
+        {
+          "name": "metadata",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "createCheckpoint",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "checkpoint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "checkpointDataInit",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "checkpointId",
+          "type": "u16"
+        },
+        {
+          "name": "maxLength",
+          "type": "u64"
+        },
+        {
+          "name": "metadata",
+          "type": "u16"
+        },
+        {
+          "name": "voteMachine",
+          "type": "publicKey"
+        },
+        {
+          "name": "children",
+          "type": {
+            "option": {
+              "vec": "u16"
+            }
+          }
+        },
+        {
+          "name": "dataInit",
+          "type": {
+            "option": "bytes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "createWormholeMax",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "checkpointWormholeMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "checkpointId",
+          "type": "u16"
+        },
+        {
+          "name": "wormholeChainId",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createWormholePayload",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "checkpointWormholeMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "checkpointWormholePayload",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "checkpointId",
+          "type": "u16"
+        },
+        {
+          "name": "wormholeChainId",
+          "type": "u8"
+        },
+        {
+          "name": "payload",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "initProviderMax",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "providerMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initProvider",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "providerMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "providers",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addProvider",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "providers",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nameProvider",
+          "type": "string"
+        },
+        {
+          "name": "addressProvider",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "editProvider",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "providers",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nameProvider",
+          "type": "string"
+        },
+        {
+          "name": "addressProvider",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "initVotemachineMax",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "votemachineMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initVotemachine",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "votemachineMax",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "votemachines",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addVotemachine",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "votemachines",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "votemachineAddress",
+          "type": "publicKey"
+        },
+        {
+          "name": "statusVotemachine",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "editVotemachine",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "votemachines",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "votemachineAddress",
+          "type": "publicKey"
+        },
+        {
+          "name": "statusVotemachine",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "attachCheckpoint",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "child",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "parent",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "checkpointId",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "setStartCheckpoint",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "edit",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "delete",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "vote",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "currentCheckpointVotedData",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "currentCheckpoint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "currentVoteMachine",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["CHECK"]
+        }
+      ],
+      "args": [
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "tally",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "worflow",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "currentCheckpointVotedData",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "currentCheckpoint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "currentVoteMachine",
+          "isMut": false,
+          "isSigner": false,
+          "docs": ["CHECK"]
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "User",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "maxMissionId",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mission",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "currentCheckpoint",
+            "type": {
+              "option": "u16"
+            }
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "MissionState"
+            }
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "maxCheckpointId",
+            "type": "u16"
+          },
+          {
+            "name": "metadata",
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Checkpoint",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "started",
+            "type": "u64"
+          },
+          {
+            "name": "maxLength",
+            "type": "u64"
+          },
+          {
+            "name": "metadata",
+            "type": "u16"
+          },
+          {
+            "name": "voteMachine",
+            "type": "publicKey"
+          },
+          {
+            "name": "children",
+            "type": {
+              "option": {
+                "vec": "u16"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CheckpointDataInit",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": {
+              "option": "bytes"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CurrentVoteData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MissionUserSolana",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MissionUserWeb2",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MissionUserSecp256k1",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WormholeMax",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "max",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WormholePayload",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "payload",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProviderMax",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "maxListProvider",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VotemachineMax",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "maxListVotemachine",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Provider",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "listProviders",
+            "type": {
+              "vec": {
+                "defined": "ProviderInfo"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Votemachine",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "listVotemachines",
+            "type": {
+              "vec": {
+                "defined": "VotemachineInfo"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "ProviderInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VotemachineInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "votemachine",
+            "type": "publicKey"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": "VotemachineState"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MissionState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "DRAFT"
+          },
+          {
+            "name": "STARTED"
+          },
+          {
+            "name": "STOPPED"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VotemachineState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "INACTIVE"
+          },
+          {
+            "name": "ACTIVE"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "address": "4Ey5VNt2PH4SvVptF2hH3EEgge48GyZfczZps7edJ8Ws"
+  }
+}
